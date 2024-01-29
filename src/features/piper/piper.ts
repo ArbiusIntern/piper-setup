@@ -1,30 +1,26 @@
+import { TalkStyle } from "@/features/chat/messages";
 import { config } from '@/utils/config';
 
 export async function piper(
-  file: File,
-  prompt?: string,
+  message: string,
+  style: TalkStyle,
 ) {
-  // Request body
-  const formData = new FormData();
-  formData.append('file', file);
-  if (prompt) {
-    formData.append('prompt', prompt);
-  }
 
-  console.debug('piper req', formData);
-
-  const res = await fetch(`${config("piper_url")}/inference`, {
+  const res = await fetch(`${config("piper_url")}`, {
     method: "POST",
-    body: formData,
+    body: message,
     headers: {
-      'Accept': 'text/html',
+      "Content-Type": "text/plain",
     },
   });
+
   if (! res.ok) {
     throw new Error(`Piper API Error (${res.status})`);
   }
-  const data = await res.json();
+
+  const data = (await res.arrayBuffer()) as any;
+
   console.debug('piper res', data);
 
-  return { text: data.text.trim() };
+  return { audio: data };
 }
