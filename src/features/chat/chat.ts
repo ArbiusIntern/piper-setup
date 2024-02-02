@@ -10,6 +10,8 @@ import { getWindowAiChatResponseStream } from './windowAiChat';
 import { getOllamaChatResponseStream, getOllamaVisionChatResponse } from './ollamaChat';
 import { getKoboldAiChatResponseStream } from './koboldAiChat';
 
+import { fastspeech2} from "@/features/fastspeech2-en/fastspeech2";
+import { piper} from "@/features/piper/piper";
 import { elevenlabs } from "@/features/elevenlabs/elevenlabs";
 import { coqui } from "@/features/coqui/coqui";
 import { speecht5 } from "@/features/speecht5/speecht5";
@@ -417,6 +419,14 @@ export class Chat {
         }
         case 'openai_tts': {
           const voice = await openaiTTS(talk.message);
+          return voice.audio;
+        }
+        case 'fastspeech2': {
+          const voice = await fastspeech2(talk.message);
+          return voice.audio;
+        }
+        case 'piper': {
+          const voice = await piper(talk.message);
           return voice.audio;
         }
       }

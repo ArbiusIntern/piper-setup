@@ -197,7 +197,7 @@ function getLabelFromPage(page: string): string {
     case 'coqui_settings':      return t('Coqui');
     case 'openai_tts_settings': return t('OpenAI');
     case 'piper_settings':      return t('Piper');
-    case 'fastspeech2_settings':      return t('FastSpeech2');
+    case 'fastspeech2_settings':return t('FastSpeech2');
 
     case 'vision_backend':           return t('Vision Backend');
     case 'vision_llamacpp_settings': return t('LLama.cpp');

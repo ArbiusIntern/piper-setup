@@ -1,9 +1,7 @@
-import { TalkStyle } from "@/features/chat/messages";
 import { config } from '@/utils/config';
 
 export async function piper(
   message: string,
-  style: TalkStyle,
 ) {
 
   const res = await fetch(`${config("piper_url")}`, {
