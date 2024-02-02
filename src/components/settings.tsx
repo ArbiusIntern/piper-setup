@@ -47,6 +47,7 @@ import { SpeechT5SettingsPage } from './settings/SpeechT5SettingsPage';
 import { CoquiSettingsPage } from './settings/CoquiSettingsPage';
 import { OpenAITTSSettingsPage } from './settings/OpenAITTSSettingsPage';
 import { PiperSettingsPage } from './settings/PiperSettingsPage';
+import { FastSpeech2SettingsPage } from './settings/FastSpeech2SettingsPage';
 
 import { STTBackendPage } from './settings/STTBackendPage';
 import { WhisperOpenAISettingsPage } from './settings/WhisperOpenAISettingsPage';
@@ -96,6 +97,9 @@ export const Settings = ({
   const [openAITTSUrl, setOpenAITTSUrl] = useState(config("openai_tts_url"));
   const [openAITTSModel, setOpenAITTSModel] = useState(config("openai_tts_model"));
   const [openAITTSVoice, setOpenAITTSVoice] = useState(config("openai_tts_voice"));
+
+  const [fastspeech2ApiKey, setFastspeech2ApiKey] = useState(config("fastspeech2_apikey"));
+  const [fastspeech2Url, setFastspeech2Url] = useState(config("fastspeech2_url"))
 
   const [piperUrl, setPiperUrl] = useState(config("piper_url"));
 
@@ -208,6 +212,7 @@ export const Settings = ({
     coquiApiKey, coquiVoiceId,
     openAITTSApiKey, openAITTSUrl, openAITTSModel, openAITTSVoice,
     piperUrl,
+    fastspeech2ApiKey, fastspeech2Url,
     visionBackend,
     visionLlamaCppUrl,
     visionOllamaUrl, visionOllamaModel,
@@ -246,7 +251,7 @@ export const Settings = ({
 
     case 'tts':
       return <MenuPage
-        keys={["tts_backend", "elevenlabs_settings", "speecht5_settings", "coqui_settings", "openai_tts_settings", "piper_settings"]}
+        keys={["tts_backend", "elevenlabs_settings", "speecht5_settings", "coqui_settings", "openai_tts_settings", "piper_settings", "fastspeech2_settings"]}
         menuClick={handleMenuClick} />;
 
     case 'stt':
@@ -402,6 +407,15 @@ export const Settings = ({
       return <PiperSettingsPage
         piperUrl={piperUrl}
         setPiperUrl={setPiperUrl}
+        setSettingsUpdated={setSettingsUpdated}
+        />
+
+    case 'fastspeech2_settings':
+      return <FastSpeech2SettingsPage
+        fastspeech2ApiKey={fastspeech2ApiKey}
+        setFastspeech2ApiKey={setFastspeech2ApiKey}
+        fastspeech2Url={fastspeech2Url}
+        setFastspeech2Url={setFastspeech2Url}
         setSettingsUpdated={setSettingsUpdated}
         />
 
