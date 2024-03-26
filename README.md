@@ -1,34 +1,48 @@
-  Piper TTS
+# Piper TTS
 
-    First : Open piper tts server locally using Docker
-    - https://github.com/rhasspy/piper/issues/410
+## First: Open Piper TTS Server Locally using Docker
 
-        - https://github.com/artibex/piper-http
-        In Dockerfile add this 
-            : RUN pip install flask_cors
+To open the Piper TTS server locally using Docker, follow these steps:
 
-    Second : Implement flask_cors in your local server 
+1. Navigate to the [Piper GitHub issue #410](https://github.com/rhasspy/piper/issues/410) for details on running the server locally.
+2. Refer to [artibex/piper-http](https://github.com/artibex/piper-http) for Dockerfile changes. Add the following line to the Dockerfile:
+    ```
+    RUN pip install flask_cors
+    ```
 
-        : Add this to the head in src/python_run/piper/http_server.py
-            - from flask_cors import CORS
-            
-        : Add this after app = Flask(__name__) in server.py
-            - CORS(app)
-    
-    
-  Coqui Local TTS  
-    
-    First : Open coqui tts server locally
-    - https://docs.coqui.ai/en/dev/docker_images.html#start-a-server
-    
-      : For M1 / M2
-      - https://blog.graywind.org/posts/coqui-tts-mac/
-    
-    Second : Implement flask_cors in your local server 
+## Second: Implement Flask-CORS in Your Local Server
 
-        : Add this to the head in TTS/server/server.py
-            - from flask_cors import CORS
-            
-        : Add this after app = Flask(__name__) in server.py
-            - CORS(app)
-           
+To implement Flask-CORS in your local server, follow these steps:
+
+1. Add the following import statement at the top of `src/python_run/piper/http_server.py`:
+    ```python
+    from flask_cors import CORS
+    ```
+
+2. Add the following line after `app = Flask(__name__)` in `server.py`:
+    ```python
+    CORS(app)
+    ```
+
+# Coqui Local TTS
+
+## First: Open Coqui TTS Server Locally
+
+To open the Coqui TTS server locally, follow these steps:
+
+1. Refer to the [Coqui TTS Docker Images documentation](https://docs.coqui.ai/en/dev/docker_images.html#start-a-server) for instructions on starting a server.
+2. For M1 / M2 chips, follow the instructions provided in [this blog post](https://blog.graywind.org/posts/coqui-tts-mac/).
+
+## Second: Implement Flask-CORS in Your Local Server
+
+To implement Flask-CORS in your local Coqui TTS server, follow these steps:
+
+1. Add the following import statement at the top of `TTS/server/server.py`:
+    ```python
+    from flask_cors import CORS
+    ```
+
+2. Add the following line after `app = Flask(__name__)` in `server.py`:
+    ```python
+    CORS(app)
+    ```
