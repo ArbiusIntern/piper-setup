@@ -47,6 +47,7 @@ import { SpeechT5SettingsPage } from './settings/SpeechT5SettingsPage';
 import { CoquiSettingsPage } from './settings/CoquiSettingsPage';
 import { OpenAITTSSettingsPage } from './settings/OpenAITTSSettingsPage';
 import { CoquiLocalSettingsPage } from './settings/CoquiLocalSettingsPage';
+import { PiperSettingsPage } from './settings/PiperSettingsPage';
 
 import { STTBackendPage } from './settings/STTBackendPage';
 import { WhisperOpenAISettingsPage } from './settings/WhisperOpenAISettingsPage';
@@ -97,6 +98,8 @@ export const Settings = ({
   const [openAITTSModel, setOpenAITTSModel] = useState(config("openai_tts_model"));
   const [openAITTSVoice, setOpenAITTSVoice] = useState(config("openai_tts_voice"));
   
+  const [piperUrl, setPiperUrl] = useState(config("piper_url"));
+
   const [coquiLocalUrl, setCoquiLocalUrl] = useState(config("coquiLocal_url"));
   const [coquiLocalVoiceId, setCoquiLocalVoiceId] = useState(config("coquiLocal_voiceid"));
 
@@ -209,6 +212,7 @@ export const Settings = ({
     coquiApiKey, coquiVoiceId,
     openAITTSApiKey, openAITTSUrl, openAITTSModel, openAITTSVoice,
     coquiLocalUrl,coquiLocalVoiceId,
+    piperUrl,
     visionBackend,
     visionLlamaCppUrl,
     visionOllamaUrl, visionOllamaModel,
@@ -247,7 +251,7 @@ export const Settings = ({
 
     case 'tts':
       return <MenuPage
-        keys={["tts_backend", "elevenlabs_settings", "speecht5_settings", "coqui_settings", "openai_tts_settings", "coquiLocal_settings"]}
+        keys={["tts_backend", "elevenlabs_settings", "speecht5_settings", "coqui_settings", "openai_tts_settings", "coquiLocal_settings", "piper_settings"]}
         menuClick={handleMenuClick} />;
 
     case 'stt':
@@ -407,6 +411,13 @@ export const Settings = ({
         setCoquiLocalUrl={setCoquiLocalUrl}
         setSettingsUpdated={setSettingsUpdated}
         />
+
+    case 'piper_settings':
+      return <PiperSettingsPage
+          piperUrl={piperUrl}
+          setPiperUrl={setPiperUrl}
+          setSettingsUpdated={setSettingsUpdated}
+          />
 
     case'stt_backend':
       return <STTBackendPage
