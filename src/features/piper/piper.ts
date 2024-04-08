@@ -19,25 +19,25 @@ export async function piper(
     }
   }
 
-  async function convertWithRVC(inputFilePath, modelPath, f0UpKey = 0, f0Method = "rmvpe") {
-    // Call an API endpoint or service that triggers the RVC conversion
-    const response = await fetch('/api/rvc-convert', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            inputFilePath,
-            modelPath,
-            f0UpKey,
-            f0Method,
-        }),
-    });
+export async function convertWithRVC(inputFilePath='', modelPath='', f0UpKey = 0, f0Method = "rmvpe") {
+  // Call an API endpoint or service that triggers the RVC conversion
+  const response = await fetch('./rvc_api/rvc-convert', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+          inputFilePath,
+          modelPath,
+          f0UpKey,
+          f0Method,
+      }),
+  });
 
-    if (!response.ok) {
-        throw new Error('RVC conversion failed');
-    }
+  if (!response.ok) {
+      throw new Error('RVC conversion failed');
+  }
 
-    const data = await response.json();
-    return data.outputFilePath;
+  const data = await response.json();
+  return data.outputFilePath;
 }
